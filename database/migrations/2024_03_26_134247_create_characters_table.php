@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('strength');
             $table->integer('accuracy');
             $table->integer('magic');
-            $table->timestamps('created_at');
             $table->timestamps('updated_at');
         });
     }
