@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('strength');
             $table->integer('accuracy');
             $table->integer('magic');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps('updated_at');
         });
     }
