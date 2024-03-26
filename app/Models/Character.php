@@ -15,6 +15,7 @@ class Character extends Model
         'defence',
         'strength',
         'accuracy',
+        'user_id',
         'magic'
     ];
 
