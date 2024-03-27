@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 50; $i++){
             $isWin = rand(0,1) == 1;
             $game = Game::create([
-                'win' => rand(0,1) == $isWin,
+                'win' => $isWin,
                 'history' => fake() -> text(),
                 'user_id' => $users -> random() -> id,
                 'place_id' => $places -> random() ->id

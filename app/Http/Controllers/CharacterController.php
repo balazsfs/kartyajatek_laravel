@@ -43,7 +43,8 @@ class CharacterController extends Controller
      */
     public function show(Character $character)
     {
-        //
+        Gate::authorize('view',$character,User::class);
+        return view("characters.show", ['character' => $character, 'games' => $character->games()->get()]);
     }
 
     /**
