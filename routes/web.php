@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CharacterController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+
+Route::get('/characters',[CharacterController::class,'index'])->name('characters.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
