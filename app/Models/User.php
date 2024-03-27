@@ -27,6 +27,10 @@ class User extends Authenticatable
         return $this->hasMany(Character::class);
     }
 
+    public function admin(){
+        return $this->admin;
+    }
+
     public function games(){
         return $this->hasMany(Game::class);
     }

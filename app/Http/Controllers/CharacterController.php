@@ -27,7 +27,8 @@ class CharacterController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('create',Character::class);
+        return view('characters.create');
     }
 
     /**
@@ -35,7 +36,42 @@ class CharacterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('create',Character::class);
+
+        $validated = $request->validate(
+            [
+                'name' => 'required|min:3',
+                'enemy' => '',
+                'defence' => 'required|numeric|min:0|max:20',
+                'strength' => 'required|numeric|min:0|max:20',
+                'accuracy' => 'required|numeric|min:0|max:20',
+                'magic' => 'required|numeric|min:0|max:20'
+            ],
+            [
+                'title.required' => 'Név megadás kötelező!',
+                'title.min' => 'A névnek legalább :min kell lennie!',
+                'defence.numeric' => 'Az attribútomnak számot kell megadnod!',
+                'strength.numeric' => 'Az attribútomnak számot kell megadnod!',
+                'accuracy.numeric' => 'Az attribútomnak számot kell megadnod!',
+                'magic.numeric' => 'Az attribútomnak számot kell megadnod!',
+                'defence.min' => 'Az attribútumoknak legalább 0-nak kell lennie!',
+                'strength.min' => 'Az attribútumoknak legalább 0-nak kell lennie!',
+                'accuracy.min' => 'Az attribútumoknak legalább 0-nak kell lennie!',
+                'magic.min' => 'Az attribútumoknak legalább 0-nak kell lennie!',
+                'defence.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
+                'strength.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
+                'accuracy.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
+                'magic.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
+            ]
+        );
+        $totalPoints = $validated['defence'] + $validated['strength'] + $validated['accuracy'] + $validated['magic'];
+        if ($totalPoints !== 20) {
+            return redirect()->back()->withErrors(['attributes' => 'Az attribútumok összegének 20-nak kell lennie!'])->withInput();
+        }
+
+        $validated['user_id'] = Auth::id();
+        $character = Character::create($validated);
+        return redirect() -> route('characters.index');
     }
 
     /**
