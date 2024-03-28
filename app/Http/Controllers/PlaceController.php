@@ -115,6 +115,7 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         Gate::authorize('delete',$place,User::class);
+        Storage::disk('public')->delete('images/'.$place->file_path);
         $place ->delete();
         return redirect() -> route('places.index');
     }
