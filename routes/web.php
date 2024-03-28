@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\GameController;
 
 Route::get('/', function () {return view('welcome');});
 
@@ -21,6 +22,11 @@ Route::post('/places',[PlaceController::class,'store'])->name('places.store');
 Route::get('/places/{place}/edit',[PlaceController::class,'edit'])->name('places.edit');
 Route::patch('/places/{place}',[PlaceController::class,'update'])->name('places.update');
 Route::delete('/places/{place}',[PlaceController::class,'destroy'])->name('places.destroy');
+
+
+Route::get('/games/{game}',[GameController::class,'show'])->name('games.show');
+Route::post('/games/{game}',[GameController::class,'attack'])->name('games.attack');
+Route::post('/games',[GameController::class,'store'])->name('games.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

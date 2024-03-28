@@ -34,5 +34,13 @@
                 <a href="#" onclick="this.closest('form').submit()">Törlés</a>
             </form>
         @endcan
+        @if (!$character->enemy)
+            <form action="{{ route('games.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="character_id" value="{{$character->id}}">
+                <a href="#" onclick="this.closest('form').submit()">Új meccs</a>
+            </form>
+        @endif
+
     </div>
 @endsection

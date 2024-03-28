@@ -62,10 +62,10 @@ class DatabaseSeeder extends Seeder
         $enemies = collect();
 
         for ($i = 0; $i < 25; $i++){
-            $def = rand(0,20);
-            $strength = rand(0,20-$def);
-            $accuracy = rand(0,20-($strength+$def));
-            $magic = rand(0,20-($accuracy+$strength+$def));
+            $strength = rand(0,15);
+            $accuracy = rand(0,15-$strength);
+            $magic = rand(0,15-($strength+$accuracy));
+            $def = 20-($accuracy+$strength+$magic);
             $enemy = Character::create([
                 'name' => fake() -> name(),
                 'enemy' => true,
