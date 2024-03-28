@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\PlaceController;
 
 Route::get('/', function () {return view('welcome');});
 
@@ -14,6 +15,12 @@ Route::get('/characters/{character}/edit',[CharacterController::class,'edit'])->
 Route::patch('/characters/{character}',[CharacterController::class,'update'])->name('characters.update');
 Route::delete('/characters/{character}',[CharacterController::class,'destroy'])->name('characters.destroy');
 
+Route::get('/places',[PlaceController::class,'index'])->name('places.index');
+Route::get('/places/create',[PlaceController::class,'create'])->name('places.create');
+Route::post('/places',[PlaceController::class,'store'])->name('places.store');
+Route::get('/places/{place}/edit',[PlaceController::class,'edit'])->name('places.edit');
+Route::patch('/places/{place}',[PlaceController::class,'update'])->name('places.update');
+Route::delete('/places/{place}',[PlaceController::class,'destroy'])->name('places.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
