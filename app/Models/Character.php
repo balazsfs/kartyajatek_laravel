@@ -22,6 +22,9 @@ class Character extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function enemy(){
+        return $this->enemy();
+    }
     public function games()
     {
         return $this->belongsToMany(Game::class)->withPivot('hero_hp', 'enemy_hp')->withTimestamps();

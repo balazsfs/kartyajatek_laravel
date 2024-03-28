@@ -45,7 +45,7 @@ class CharacterPolicy
      */
     public function delete(User $user, Character $character): bool
     {
-        //
+        return $user !== null && $character -> user_id == $user -> id || $user -> admin && $character->enemy;
     }
 
     /**

@@ -23,6 +23,16 @@
                 Még nem volt meccse ennek a karakternek
             @endforelse
         </div>
-        <a href="{{route('characters.edit',['character'=>$character])}}">Szerkesztés</a>
+        @can('update',$character)
+            <a href="{{route('characters.edit',['character'=>$character])}}">Szerkesztés</a>
+        @endcan
+
+        @can('delete',$character)
+            <form action="{{ route('characters.destroy', ['character' => $character ])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <a href="#" onclick="this.closest('form').submit()">Törlés</a>
+            </form>
+        @endcan
     </div>
 @endsection

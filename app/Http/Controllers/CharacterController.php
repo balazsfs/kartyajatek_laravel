@@ -139,6 +139,8 @@ class CharacterController extends Controller
      */
     public function destroy(Character $character)
     {
-        //
+        Gate::authorize('delete',$character,User::class);
+        $character ->delete();
+        return redirect() -> route('characters.index');
     }
 }
