@@ -37,7 +37,7 @@ class CharacterPolicy
      */
     public function update(User $user, Character $character): bool
     {
-        //
+        return $user !== null && $character -> user_id == $user -> id;
     }
 
     /**

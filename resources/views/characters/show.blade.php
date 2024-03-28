@@ -23,5 +23,6 @@
                 Még nem volt meccse ennek a karakternek
             @endforelse
         </div>
+        <a href="{{route('characters.edit',['character'=>$character])}}">Szerkesztés</a>
     </div>
 @endsection

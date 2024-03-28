@@ -13,6 +13,7 @@
                     <p>Magic: {{ $ch -> magic}}</p>
                     <p>Accuracy: {{ $ch -> accuracy}}</p>
                 </div>
+                <a href="{{route('characters.show',['character'=>$ch])}}">Bővebben</a>
             </div>
         @empty
             <p>Ninencsen karaktereid!</p>
