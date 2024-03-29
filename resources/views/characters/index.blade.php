@@ -3,17 +3,27 @@
 @section('content')
     <div class="grid gap-4 grid-cols-6 grid-rows-3">
         @forelse ($characters as $ch)
-            <div class="bg-green-500 p-1 m-1 rounded-lg">
+            <div class="bg-yellow-100 p-1 m-1 border-4 border-yellow-800 rounded">
+                <div class="flex justify-center">
+                    @if ($ch -> enemy)
+                    <img src="{{Storage::url('images/enemy.png')}}" alt="">
+                    @else
+                        <img src="{{Storage::url('images/gladiator.png')}}" alt="">
+                    @endif
+                </div>
                 <div class="text-center">
                     <b>{{ $ch -> name}}</b>
                 </div>
                 <div class="text-center">
-                    <p>Strength: {{ $ch -> strength}}</p>
-                    <p>Defence: {{ $ch -> defence}}</p>
-                    <p>Magic: {{ $ch -> magic}}</p>
-                    <p>Accuracy: {{ $ch -> accuracy}}</p>
+                    <p>Erő: {{ $ch -> strength}}</p>
+                    <p>Ügyesség: {{ $ch -> accuracy}}</p>
+                    <p>Intelligencia: {{ $ch -> magic}}</p>
+                    <p>Védelem: {{ $ch -> defence}}</p>
                 </div>
-                <a href="{{route('characters.show',['character'=>$ch])}}">Bővebben</a>
+                <div class="p-2 text-center">
+                    <a class="bg-amber-300 rounded p-1 border border-yellow-800" href="{{route('characters.show',['character'=>$ch])}}">Bővebben</a>
+                </div>
+
             </div>
         @empty
             <p>Ninencsen karaktereid!</p>

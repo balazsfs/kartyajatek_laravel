@@ -95,13 +95,14 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++){
             $isWin = rand(0,1) == 1;
+            $random_character = $characters->random(1);
             $game = Game::create([
                 'win' => $isWin,
                 'history' => fake() -> text(),
-                'user_id' => $users -> random() -> id,
+                'user_id' => $random_character->pluck('user_id')->implode(', '),
                 'place_id' => $places -> random() ->id
             ]);
-            $enemy_hero_merged_ids = $characters->random(1)->pluck('id')-> merge($enemies->random(1)->pluck('id'));
+            $enemy_hero_merged_ids = $random_character->pluck('id')-> merge($enemies->random(1)->pluck('id'));
             $game -> characters() -> syncWithPivotValues($enemy_hero_merged_ids, ['hero_hp' => $isWin ? rand(1,20) : 0,'enemy_hp' => $isWin ? 0 : rand(1,20)]);
 
             $games -> add($game);

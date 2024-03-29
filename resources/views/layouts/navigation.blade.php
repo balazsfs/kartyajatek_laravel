@@ -16,7 +16,13 @@
                     <x-nav-link :href="route('characters.index')" :active="request()->routeIs('characters.index')">
                         {{ __('Karakterek') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('characters.create')" :active="request()->routeIs('characters.create')">
+                        {{ __('Karakter létrehozása') }}
+                    </x-nav-link>
                     @if(Auth::user()->admin())
+                        <x-nav-link :href="route('places.index')" :active="request()->routeIs('places.index')">
+                            {{ __('Helyek') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('places.create')" :active="request()->routeIs('places.create')">
                             {{ __('Hely létrehozása') }}
                         </x-nav-link>

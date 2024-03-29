@@ -28,9 +28,7 @@
         </div>
     @endforeach
 
-    @if($game->win)
-        Nyertél
-    @elseif($game->win == null)
+    @if($game->win == null)
         <form action="{{ route('games.attack', ['game' => $game])}}" method="POST">
             @csrf
             <input type="hidden" name="attackType" value="melee">
@@ -46,8 +44,10 @@
             <input type="hidden" name="attackType" value="special">
             <a href="#" onclick="this.closest('form').submit()">Special</a>
         </form>
-    @else
+    @elseif(!$game->win)
         Veszítettél
+    @elseif($game->win)
+        Nyertél
     @endif
     </div>
 @endsection
