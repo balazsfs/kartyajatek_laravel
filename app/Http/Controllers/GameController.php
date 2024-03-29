@@ -83,16 +83,6 @@ class GameController extends Controller
             }elseif($attackType == "special"){
                 $damage = ($att->strength * 0.1 + $att->accuracy * 0.1 + $att->magic * 0.7) - $def->defence;
             }
-            if($def->pivot->hero_hp<0)
-            {
-                $def->pivot->hero_hp = 0;
-                $game->win = false;
-            }
-            if($def->pivot->enemy_hp<0)
-            {
-                $def->pivot->enemy_hp = 0;
-                $game->win = true;
-            }
             return $damage > 0 ? $damage : 0;
         }
         $character = $game->characters()->first();
@@ -102,7 +92,12 @@ class GameController extends Controller
         // CHARACTER ATTACKS ONE
         $character_damage = calculateDamage($character,$enemy,$attackType,$game);
         $character ->pivot->enemy_hp -= $character_damage;
-        $enemy ->pivot->enemy_hp -= $character_damage;
+        $enemy->pivot->enemy_hp -= $character_damage;
+        if($character ->pivot->enemy_hp < 0){
+            $game ->win = true;
+            $character ->pivot->enemy_hp = 0;
+            $enemy->pivot->enemy_hp = 0;
+        }
 
         //ENEMY ATTACKS BACK INSTANTLY
         $attackTypes = ['melee','ranged','magic'];
@@ -110,6 +105,12 @@ class GameController extends Controller
         $enemy_damage = calculateDamage($enemy,$character,$random_attackType,$game);
         $character ->pivot->hero_hp -= $enemy_damage;
         $enemy ->pivot->hero_hp -= $enemy_damage;
+        if($enemy ->pivot->hero_hp < 0){
+            $game ->win = false;
+            $character ->pivot->hero_hp = 0;
+            $enemy->pivot->hero_hp = 0;
+        }
+
 
         $game -> characters() -> syncWithPivotValues([$character->id,$enemy->id], ['hero_hp' => $character->pivot->hero_hp,'enemy_hp' => $character->pivot->enemy_hp]);
         $game -> history .= " ".$character->name.": ".$attackType." - " . $character_damage . " damage";

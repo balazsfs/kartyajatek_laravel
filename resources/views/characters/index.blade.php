@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="grid gap-4 grid-cols-6 grid-rows-3 p-5">
+    <div class="grid gap-4 grid-cols-6 grid-rows-3">
         @forelse ($characters as $ch)
             <div class="bg-green-500 p-1 m-1 rounded-lg">
                 <div class="text-center">
