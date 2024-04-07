@@ -1,45 +1,88 @@
 @extends('layouts.main')
 
 @section('content')
-    <form action="{{route('characters.store')}}" method="POST">
+<div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+<form action="{{route('characters.store')}}" method="POST">
+        <div class="grid grid-cols-2">
         @csrf
-        Karakter név:
-        <input type="text" name="name" value="{{old('name','')}}"><br>
-        @error('name')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+        <b>
+            Karakter név:
+        </b>
 
-        Erő:
-        <input type="text" name="strength" value="{{old('strength','')}}"><br>
-        @error('strength')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+        <div>
+            <input class="rounded-xl" type="text" name="name" value="{{old('name','')}}">
+            @error('name')
+                <br><span class="text-red-600 font-bold">{{ $message }}</span>
+            @enderror
+        </div>
 
-        Védelem:
-        <input type="text" name="defence" value="{{old('defence','')}}"><br>
-        @error('defence')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
 
-        Ügyesség:
-        <input type="text" name="accuracy" value="{{old('accuracy','')}}"><br>
-        @error('accuracy')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+        <b>
+            Erő:
+        </b>
 
-        Intelligencia:
-        <input type="text" name="magic" value="{{old('magic','')}}"><br>
-        @error('magic')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+
+        <div>
+            <input class="rounded-xl" type="text" name="strength" value="{{old('strength','')}}">
+            @error('strength')
+                <br><span class="text-red-600 font-bold">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <b>
+            Védelem:
+        </b>
+
+        <div>
+            <input class="rounded-xl" type="text" name="defence" value="{{old('defence','')}}">
+            @error('defence')
+                <br><span class="text-red-600 font-bold">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <b>
+            Ügyesség:
+        </b>
+
+        <div>
+            <input class="rounded-xl" type="text" name="accuracy" value="{{old('accuracy','')}}">
+            @error('accuracy')
+                <br><span class="text-red-600 font-bold">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <b>
+            Intelligencia:
+        </b>
+
+        <div>
+            <input class="rounded-xl" type="text" name="magic" value="{{old('magic','')}}">
+            @error('magic')
+                <br><span class="text-red-600 font-bold">{{ $message }}</span>
+            @enderror
+        </div>
+
+
+        </div>
+
+        <div>
+
 
         @if(auth()->user()->admin())
+        <div>
+            <span>Ellenfél:</span>
             <input type="checkbox" name="enemy" value='1'>
+        </div>
         @endif
 
         @error('attributes')
-            <span class="text-red-500">{{ $message }}</span><br>
+            <span class="text-red-600 font-bold">{{ $message }}</span>
         @enderror
-        <button class="bg-green-500 hover:bg-green-700" type="submit">Mentés</button>
+
+        <div class="text-center">
+            <button class="bg-green-500 rounded pl-5 pr-5 pb-3 pt-3 m-5 border border-black" type="submit">Mentés</button>
+        </div>
     </form>
+</div>
+</div>
 @endsection

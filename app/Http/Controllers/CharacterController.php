@@ -48,8 +48,8 @@ class CharacterController extends Controller
                 'magic' => 'required|numeric|min:0|max:20'
             ],
             [
-                'title.required' => 'Név megadás kötelező!',
-                'title.min' => 'A névnek legalább :min kell lennie!',
+                'name.required' => 'Név megadás kötelező!',
+                'name.min' => 'A névnek legalább :min kell lennie!',
                 'defence.numeric' => 'Az attribútomnak számot kell megadnod!',
                 'strength.numeric' => 'Az attribútomnak számot kell megadnod!',
                 'accuracy.numeric' => 'Az attribútomnak számot kell megadnod!',
@@ -62,6 +62,10 @@ class CharacterController extends Controller
                 'strength.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
                 'accuracy.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
                 'magic.max' => 'Az attribútumoknak maximum 20-ig adhatsz meg értéket!',
+                'strength.required' => 'Az összes attribútumot megkell adnod!',
+                'accuracy.required' => 'Az összes attribútumot megkell adnod!',
+                'defence.required' => 'Az összes attribútumot megkell adnod!',
+                'magic.required' => 'Az összes attribútumot megkell adnod!'
             ]
         );
         $totalPoints = $validated['defence'] + $validated['strength'] + $validated['accuracy'] + $validated['magic'];
