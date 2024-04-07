@@ -1,47 +1,88 @@
 @extends('layouts.main')
 
 @section('content')
+<div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <form action="{{route('characters.update',['character'=>$character])}}" method="POST">
         @csrf
         @method('PATCH')
+        <div class="grid grid-cols-2">
 
-        Karakter név:
-        <input type="text" name="name" value="{{old('name',$character->name)}}"><br>
-        @error('name')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+            <b class="mt-2 mb-2">
+                Karakter név:
+            </b>
 
-        Erő:
-        <input type="text" name="strength" value="{{old('strength',$character->strength)}}"><br>
-        @error('strength')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+            <div class="mt-2 mb-2">
+                <input class="rounded-xl" type="text" name="name" value="{{$character->name}}">
+                @error('name')
+                    <br><span class="text-red-600 font-bold">{{ $message }}</span>
+                @enderror
+            </div>
 
-        Védelem:
-        <input type="text" name="defence" value="{{old('defence',$character->defence)}}"><br>
-        @error('defence')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
 
-        Ügyesség:
-        <input type="text" name="accuracy" value="{{old('accuracy',$character->accuracy)}}"><br>
-        @error('accuracy')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+            <b class="mt-2 mb-2">
+                Erő:
+            </b>
 
-        Intelligencia:
-        <input type="text" name="magic" value="{{old('magic',$character->magic)}}"><br>
-        @error('magic')
-            <span class="text-red-500">{{ $message }}</span><br>
-        @enderror
+
+            <div class="mt-2 mb-2">
+                <input class="rounded-xl" type="text" name="strength" value="{{$character->strength}}">
+                @error('strength')
+                    <br><span class="text-red-600 font-bold">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <b class="mt-2 mb-2">
+                Védelem:
+            </b>
+
+            <div class="mt-2 mb-2">
+                <input class="rounded-xl" type="text" name="defence" value="{{$character->defence}}">
+                @error('defence')
+                    <br><span class="text-red-600 font-bold">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <b class="mt-2 mb-2">
+                Ügyesség:
+            </b>
+
+            <div class="mt-2 mb-2">
+                <input class="rounded-xl" type="text" name="accuracy" value="{{$character->accuracy}}">
+                @error('accuracy')
+                    <br><span class="text-red-600 font-bold">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <b class="mt-2 mb-2">
+                Intelligencia:
+            </b>
+
+            <div class="mt-2 mb-2">
+                <input class="rounded-xl" type="text" name="magic" value="{{$character->magic}}">
+                @error('magic')
+                    <br><span class="text-red-600 font-bold">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
 
         @if(auth()->user()->admin())
-            <input type="checkbox" name="enemy" value='1'>
+        <div>
+            <span>Ellenfél:</span>
+            @if ($character->enemy)
+                <input type="checkbox" name="enemy" value='1' checked disabled>
+            @else
+                <input type="checkbox" name="enemy" value='1' disabled>
+            @endif
+        </div>
         @endif
 
         @error('attributes')
-            <span class="text-red-500">{{ $message }}</span><br>
+            <span class="text-red-600 font-bold">{{ $message }}</span>
         @enderror
-        <button class="bg-green-500 hover:bg-green-700" type="submit">Mentés</button>
+
+        <div class="text-center">
+            <button class="bg-green-500 rounded pl-5 pr-5 pb-3 pt-3 m-5 border border-black" type="submit">Mentés</button>
+        </div>
     </form>
+</div>
 @endsection

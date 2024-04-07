@@ -5,11 +5,11 @@
 <form action="{{route('characters.store')}}" method="POST">
         <div class="grid grid-cols-2">
         @csrf
-        <b>
+        <b class="mt-2 mb-2">
             Karakter név:
         </b>
 
-        <div>
+        <div class="mt-2 mb-2">
             <input class="rounded-xl" type="text" name="name" value="{{old('name','')}}">
             @error('name')
                 <br><span class="text-red-600 font-bold">{{ $message }}</span>
@@ -17,45 +17,45 @@
         </div>
 
 
-        <b>
+        <b class="mt-2 mb-2">
             Erő:
         </b>
 
 
-        <div>
+        <div class="mt-2 mb-2">
             <input class="rounded-xl" type="text" name="strength" value="{{old('strength','')}}">
             @error('strength')
                 <br><span class="text-red-600 font-bold">{{ $message }}</span>
             @enderror
         </div>
 
-        <b>
+        <b class="mt-2 mb-2">
             Védelem:
         </b>
 
-        <div>
+        <div class="mt-2 mb-2">
             <input class="rounded-xl" type="text" name="defence" value="{{old('defence','')}}">
             @error('defence')
                 <br><span class="text-red-600 font-bold">{{ $message }}</span>
             @enderror
         </div>
 
-        <b>
+        <b class="mt-2 mb-2">
             Ügyesség:
         </b>
 
-        <div>
+        <div class="mt-2 mb-2">
             <input class="rounded-xl" type="text" name="accuracy" value="{{old('accuracy','')}}">
             @error('accuracy')
                 <br><span class="text-red-600 font-bold">{{ $message }}</span>
             @enderror
         </div>
 
-        <b>
+        <b class="mt-2 mb-2">
             Intelligencia:
         </b>
 
-        <div>
+        <div class="mt-2 mb-2">
             <input class="rounded-xl" type="text" name="magic" value="{{old('magic','')}}">
             @error('magic')
                 <br><span class="text-red-600 font-bold">{{ $message }}</span>
@@ -64,9 +64,6 @@
 
 
         </div>
-
-        <div>
-
 
         @if(auth()->user()->admin())
         <div>
