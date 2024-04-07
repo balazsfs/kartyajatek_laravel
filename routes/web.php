@@ -1,12 +1,18 @@
 <?php
 
+use App\Models\Character;
+use App\Models\Game;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\GameController;
 
-Route::get('/', function () {return view('welcome');})->name('welcome');
+Route::get('/', function () {
+    $character_count = Character::count();
+    $games_count = Game::count();
+    return view('welcome',['character_count' =>  $character_count, 'game_count' => $games_count]);
+})->name('welcome');
 
 Route::get('/characters',[CharacterController::class,'index'])->name('characters.index');
 Route::get('/characters/create',[CharacterController::class,'create'])->name('characters.create');
@@ -28,9 +34,6 @@ Route::get('/games/{game}',[GameController::class,'show'])->name('games.show');
 Route::post('/games/{game}',[GameController::class,'attack'])->name('games.attack');
 Route::post('/games',[GameController::class,'store'])->name('games.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
