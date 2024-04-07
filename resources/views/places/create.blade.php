@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{Auth::user()->name }} | Hely létrehozása
+@endsection
+
 @section('content')
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <form action="{{route('places.store')}}" method="POST" enctype="multipart/form-data">

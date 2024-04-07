@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{Auth::user()->name }} | Csata
+@endsection
+
 @section('content')
     <b>Helyszín: </b>{{ $game->place()->get('name')->pluck('name')->implode(', ')}}</br>
     <b>Előzmények: </b> {{$game->history}}
@@ -30,8 +34,13 @@
             </div>
         @endforeach
     </div>
-    <div class="grid gap-4 grid-cols-3 p-5 text-center">
-        @if($game->win == null)
+
+        @if($game->win === false)
+            <p class="text-center text-xl p-5"><b>Veszítettél</b></p>
+        @elseif($game->win)
+            <p class="text-center text-xl p-5"><b>Nyertél</b></p>
+        @else
+        <div class="grid gap-4 grid-cols-3 p-5 text-center">
             <form action="{{ route('games.attack', ['game' => $game])}}" method="POST">
                 @csrf
                 <input type="hidden" name="attackType" value="melee">
@@ -47,10 +56,8 @@
                 <input type="hidden" name="attackType" value="special">
                 <a class="bg-cyan-500 rounded-xl pr-8 pl-8 pt-5 pb-5 text-xl" href="#" onclick="this.closest('form').submit()">Varázslat</a>
             </form>
-        @elseif(!$game->win)
-            Veszítettél
-        @elseif($game->win)
-            Nyertél
+        </div>
+
         @endif
-    </div>
+
 @endsection

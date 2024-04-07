@@ -93,7 +93,7 @@ class GameController extends Controller
         $character_damage = calculateDamage($character,$enemy,$attackType,$game);
         $character ->pivot->enemy_hp -= $character_damage;
         $enemy->pivot->enemy_hp -= $character_damage;
-        if($character ->pivot->enemy_hp < 0){
+        if($character ->pivot->enemy_hp <= 0){
             $game ->win = true;
             $character ->pivot->enemy_hp = 0;
             $enemy->pivot->enemy_hp = 0;
@@ -105,17 +105,17 @@ class GameController extends Controller
         $enemy_damage = calculateDamage($enemy,$character,$random_attackType,$game);
         $character ->pivot->hero_hp -= $enemy_damage;
         $enemy ->pivot->hero_hp -= $enemy_damage;
-        if($enemy ->pivot->hero_hp < 0){
+        if($enemy ->pivot->hero_hp <= 0){
             $game ->win = false;
             $character ->pivot->hero_hp = 0;
             $enemy->pivot->hero_hp = 0;
         }
 
-
+        $game->history = "";
         $game -> characters() -> syncWithPivotValues([$character->id,$enemy->id], ['hero_hp' => $character->pivot->hero_hp,'enemy_hp' => $character->pivot->enemy_hp]);
         $game -> history .= " ".$character->name.": ".$attackType." - " . $character_damage . " damage";
         $game -> history .= " ".$enemy->name.": ".$random_attackType." - " . $enemy_damage . " damage";
-        error_log($game->history);
+        $game->update(['win' => $game->win, 'history' => $game->history]);
         return view("games.show", ['game' => $game]);
     }
 

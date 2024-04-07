@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{$character->name }} | Karakter szerkesztése
+@endsection
+
 @section('content')
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <form action="{{route('characters.update',['character'=>$character])}}" method="POST">

@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{$character->name }} | Karakter leírás
+@endsection
+
 @section('content')
     <div class="grid gap-4 grid-cols-3">
         <div>

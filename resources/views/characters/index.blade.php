@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{Auth::user()->name }} | Karakterek
+@endsection
+
 @section('content')
     <div class="grid gap-4 xl:grid-cols-6 grid-rows-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
         @forelse ($characters as $ch)

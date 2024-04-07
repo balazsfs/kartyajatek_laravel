@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+{{Auth::user()->name }} | Helyek áttekintése
+@endsection
+
 @section('content')
     <div class="grid gap-4 xl:grid-cols-5 grid-rows-3 p-5 lg:grid-cols-4 sm:grid-cols-2">
         @forelse ($places as $place)
