@@ -21,7 +21,7 @@ class CharacterPolicy
      */
     public function view(User $user, Character $character): bool
     {
-        return $user !== null && $character -> user_id == $user -> id;
+        return $user !== null && $character -> user_id == $user -> id || $user -> admin;
     }
 
     /**
