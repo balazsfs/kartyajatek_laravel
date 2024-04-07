@@ -46,7 +46,7 @@
     </div>
     <div class="">
         <b>Meccsek:</b><br>
-            <div class="grid gap-4 grid-cols-4">
+            <div class="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
             @forelse ($character ->games() ->get() as $game)
                 <div class="bg-yellow-100 p-2 m-2 border-2 border-yellow-800 rounded">
                     <div class="flex justify-center">
