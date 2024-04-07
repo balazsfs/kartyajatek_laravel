@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="grid gap-4 grid-cols-6 grid-rows-3">
+    <div class="grid gap-4 xl:grid-cols-6 grid-rows-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
         @forelse ($characters as $ch)
             <div class="bg-yellow-100 p-1 m-1 border-4 border-yellow-800 rounded">
                 <div class="flex justify-center">
